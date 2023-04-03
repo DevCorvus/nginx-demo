@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  nginx:
+    build: ./
+    container_name: nginx_demo_c
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./favicon.ico:/www/favicon.ico
+    depends_on:
+      - nginx_app
+      - apache_app
+
+  nginx_app:
+    build: ./apps/nginx
+    container_name: nginx_app_c
+    ports:
+      - '81:80'
+    volumes:
+      - ./apps/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./apps/nginx/static:/app/static
+
+  apache_app:
+      build: ./apps/apache
+      container_name: apache_app_c
+      ports:
+        - '82:80'
+      volumes:
+        - ./apps/apache/static:/usr/local/apache2/htdocs
