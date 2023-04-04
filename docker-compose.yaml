@@ -15,6 +15,7 @@ services:
       - node_app
       - python_app
       - php_app
+      - go_app
 
   nginx_app:
     build: ./apps/nginx
@@ -51,9 +52,17 @@ services:
       - ./apps/python:/home/python/app
 
   php_app:
-      build: ./apps/php
-      container_name: php_app_c
-      ports:
-        - '8003:80'
-      volumes:
-        - ./apps/php:/var/www/html
+    build: ./apps/php
+    container_name: php_app_c
+    ports:
+      - '8003:80'
+    volumes:
+      - ./apps/php:/var/www/html
+
+  go_app:
+    build: ./apps/go
+    container_name: go_app_c
+    ports:
+      - '8004:8000'
+    volumes:
+      - ./apps/go:/home/go/app
