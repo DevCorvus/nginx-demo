@@ -12,6 +12,7 @@ services:
     depends_on:
       - nginx_app
       - apache_app
+      - node_app
 
   nginx_app:
     build: ./apps/nginx
@@ -23,9 +24,18 @@ services:
       - ./apps/nginx/static:/app/static
 
   apache_app:
-      build: ./apps/apache
-      container_name: apache_app_c
-      ports:
-        - '82:80'
-      volumes:
-        - ./apps/apache/static:/usr/local/apache2/htdocs
+    build: ./apps/apache
+    container_name: apache_app_c
+    ports:
+      - '82:80'
+    volumes:
+      - ./apps/apache/static:/usr/local/apache2/htdocs
+
+  node_app:
+    build: ./apps/node
+    container_name: node_app_c
+    ports:
+      - '8001:8000'
+    volumes:
+      - ./apps/node:/home/node/app
+      - /home/node/app/node_modules
