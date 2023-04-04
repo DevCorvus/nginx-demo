@@ -13,6 +13,7 @@ services:
       - nginx_app
       - apache_app
       - node_app
+      - python_app
 
   nginx_app:
     build: ./apps/nginx
@@ -39,3 +40,11 @@ services:
     volumes:
       - ./apps/node:/home/node/app
       - /home/node/app/node_modules
+
+  python_app:
+    build: ./apps/python
+    container_name: python_app_c
+    ports:
+      - '8002:8000'
+    volumes:
+      - ./apps/python:/home/python/app
