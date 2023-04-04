@@ -16,6 +16,7 @@ services:
       - python_app
       - php_app
       - go_app
+      - rust_app
 
   nginx_app:
     build: ./apps/nginx
@@ -49,7 +50,7 @@ services:
     ports:
       - '8002:8000'
     volumes:
-      - ./apps/python:/home/python/app
+      - ./apps/python:/usr/src/app
 
   php_app:
     build: ./apps/php
@@ -65,4 +66,12 @@ services:
     ports:
       - '8004:8000'
     volumes:
-      - ./apps/go:/home/go/app
+      - ./apps/go:/usr/src/app
+
+  rust_app:
+    build: ./apps/rust
+    container_name: rust_app_c
+    ports:
+      - '8005:8000'
+    volumes:
+      - ./apps/rust:/usr/src/app
