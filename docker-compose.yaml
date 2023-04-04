@@ -14,6 +14,7 @@ services:
       - apache_app
       - node_app
       - python_app
+      - php_app
 
   nginx_app:
     build: ./apps/nginx
@@ -48,3 +49,11 @@ services:
       - '8002:8000'
     volumes:
       - ./apps/python:/home/python/app
+
+  php_app:
+      build: ./apps/php
+      container_name: php_app_c
+      ports:
+        - '8003:80'
+      volumes:
+        - ./apps/php:/var/www/html
